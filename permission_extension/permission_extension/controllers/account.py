@@ -28,19 +28,17 @@ def get_account_query_conditions(user):
 	escaped = [g.replace("'", "''") for g in allowed]
 	quoted = ", ".join(f"'{g}'" for g in escaped)
 
-	return f"`tabAccount`.custom_user_group IN ({quoted})"
-
-	# return f"""
-	# (
-	#   -- permitted leaves
-	#   `tabAccount`.custom_user_group IN ({quoted})
-	#   OR
-	#   -- any parent of a permitted leaf
-	#   EXISTS (
-	#     SELECT 1 FROM `tabAccount` AS child
-	#      WHERE child.lft > `tabAccount`.lft
-	#        AND child.rgt < `tabAccount`.rgt
-	#        AND child.custom_user_group IN ({quoted})
-	#   )
-	# )
-	# """
+	return f"""
+	(
+	  -- permitted leaves
+	  `tabAccount`.custom_user_group IN ({quoted})
+	  OR
+	  -- any parent of a permitted leaf
+	  EXISTS (
+	    SELECT 1 FROM `tabAccount` AS child
+	     WHERE child.lft > `tabAccount`.lft
+	       AND child.rgt < `tabAccount`.rgt
+	       AND child.custom_user_group IN ({quoted})
+	  )
+	)
+	"""
