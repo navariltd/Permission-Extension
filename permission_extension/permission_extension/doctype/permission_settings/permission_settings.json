@@ -8,7 +8,8 @@
   "item_permission",
   "customer_permission",
   "column_break_tlnb",
-  "supplier_permission"
+  "supplier_permission",
+  "account_permission"
  ],
  "fields": [
   {
@@ -32,14 +33,20 @@
    "fieldname": "supplier_permission",
    "fieldtype": "Check",
    "label": "Allow Permission on Suppliers"
+  },
+  {
+   "default": "0",
+   "fieldname": "account_permission",
+   "fieldtype": "Check",
+   "label": "Allow Permission on Account"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-04-23 18:53:38.390824",
- "modified_by": "Administrator",
+ "modified": "2025-07-21 13:18:14.744706",
+ "modified_by": "mwendwa@navari.co.ke",
  "module": "Permission Extension",
  "name": "Permission Settings",
  "owner": "Administrator",

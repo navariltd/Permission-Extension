@@ -22,20 +22,19 @@ app_license = "agpl-3.0"
 # ]
 
 fixtures = [
-    {
-        "doctype": "Custom Field",
-        "filters": [
-            [
-                "name",
-                "in",
-                (
-                   "Item-custom_branches",
-                   "Item-custom_branch",
-                ),
-            ]
-        ],
-    },
-
+	{
+		"doctype": "Custom Field",
+		"filters": [
+			[
+				"name",
+				"in",
+				(
+					"Item-custom_branches",
+					"Item-custom_branch",
+				),
+			]
+		],
+	},
 ]
 
 # Includes in <head>
@@ -139,9 +138,10 @@ fixtures = [
 # }
 #
 permission_query_conditions = {
-    "Item": "permission_extension.permission_extension.controllers.item.get_permission_query_conditions",
-    "Customer": "permission_extension.permission_extension.controllers.customer.get_permission_query_conditions",
-    "Supplier": "permission_extension.permission_extension.controllers.supplier.get_permission_query_conditions",
+	"Item": "permission_extension.permission_extension.controllers.item.get_permission_query_conditions",
+	"Customer": "permission_extension.permission_extension.controllers.customer.get_permission_query_conditions",
+	"Supplier": "permission_extension.permission_extension.controllers.supplier.get_permission_query_conditions",
+	"Account": "permission_extension.permission_extension.controllers.account.get_permission_query_conditions",
 }
 # has_permission = {
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
@@ -263,4 +263,3 @@ permission_query_conditions = {
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-
