@@ -23,7 +23,7 @@ def get_account_query_conditions(user):
 	)
 
 	if not allowed:
-		return "1=0"
+		return ""
 
 	escaped = [frappe.db.escape(g) for g in allowed]
 	quoted = ", ".join(escaped)
@@ -66,23 +66,24 @@ def get_allowed_accounts_for_coa(company):
 
 	if user == "Administrator":
 		# only leaf accounts
-		allowed_accounts = [acc for acc in all_accounts if not acc.get("is_group")]
+		allowed_accounts = all_accounts
 	else:
 		allowed_groups = frappe.get_all(
 			"User Permission", filters={"user": user, "allow": "User Group"}, pluck="for_value"
 		)
 
 		if not allowed_groups:
-			return []
+			allowed_accounts = all_accounts
 
-		allowed_set = set(allowed_groups)
+		else:
+			allowed_set = set(allowed_groups)
 
-		# only leaf accounts in allowed groups
-		allowed_accounts = [
-			acc
-			for acc in all_accounts
-			if not acc.get("is_group") and acc.get("custom_user_group") in allowed_set
-		]
+			# only leaf accounts in allowed groups
+			allowed_accounts = [
+				acc
+				for acc in all_accounts
+				if not acc.get("is_group") and acc.get("custom_user_group") in allowed_set
+			]
 
 	# Wrap each account dict to include `value` for get_account_balances
 	wrapped_accounts = []
